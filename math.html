@@ -1,0 +1,96 @@
+<html>
+    <title>Math</title>
+    <head>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="styles/main.css">
+      <script>
+        var actualAnswer;
+        var number1;
+        var number2;
+        var correct = 0;
+        var incorrect = 0;
+        var percentage;
+        var totalQuestions = 1;
+
+        function printQuestion() {
+            actualAnswer = number1 + number2;
+            document.getElementById("theQuestion").innerHTML = "What is " + number1 + "+" + number2 + "?";
+            document.getElementById("questionNumber").innerHTML = "Question " + totalQuestions;
+
+        }
+
+        function checkAnswer() {
+            if (totalQuestions < 11) {
+              var answer = document.getElementById("txtAnswer").value;
+              if(answer == actualAnswer)
+              {
+                totalQuestions++;
+                correct++;
+                document.getElementById("finalResult").innerHTML = "Good job!";
+                if (totalQuestions < 11) {
+                  runGame();
+                } else {
+                  document.getElementById("correct").innerHTML = "Correct " + correct;
+                  document.getElementById("incorrect").innerHTML = "Incorrect " + incorrect;
+                  document.getElementById("incorrect").innerHTML = "Percentage = " + correct/incorrect;
+                }
+
+              }
+              else
+              {
+                totalQuestions++;
+                incorrect++;
+                document.getElementById("finalResult").innerHTML = "Not Quite!";
+                if (totalQuestions < 11) {
+                  runGame();
+                } else {
+                  document.getElementById("correct").innerHTML = "Correct " + correct;
+                  document.getElementById("incorrect").innerHTML = "Incorrect " + incorrect;
+                  document.getElementById("incorrect").innerHTML = "Percentage = " + (correct/10)*100 + "%";
+                }
+              }
+            }
+        }
+
+        function runGame() {
+            for(var i = 0; i < 10; i++)
+            {
+                 number1 = Math.floor(Math.random() * 10);
+                 number2 = Math.floor(Math.random() * 10);
+            }
+            printQuestion();
+        }
+      </script>
+    </head>
+    <body onload="runGame();">
+      <div class="nav">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="artwork.html">Artwork</a>
+        <a class="nav-link" href="portfolio.html">Portfolio</a>
+        <a class="nav-link active" href="math.html">Math Game</a>
+        <a class="nav-link" href="contact.html">Contact Us</a>
+      </div>
+
+      <div class="container">
+        <h1>Math Game</h1>
+        <h3 id="questionNumber"></h3>
+        <div id="theQuestion"></div>
+            <table>
+                <tr>
+                    <td>Your answer</td>
+                    <td><input type="text" id="txtAnswer"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button id="btnSubmit" onClick="checkAnswer();">Submit</button></td>
+                </tr>
+            </table>
+        <div id="finalResult"></div>
+        <div id="correct"></div>
+        <div id="incorrect"></div>
+        <div id="percentage"></div>
+      </div>
+
+
+    </body>
+
+</htmL>
